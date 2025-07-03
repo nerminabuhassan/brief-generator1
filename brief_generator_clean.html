@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Copywriter Brief Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 40px; max-width: 800px; margin: auto; color: #222; }
+    h1 { color: #1a237e; }
+    label { display: block; margin-top: 20px; font-weight: bold; }
+    textarea, input[type="text"], select {
+      width: 100%; padding: 10px; margin-top: 5px;
+      border: 1px solid #ccc; border-radius: 6px;
+      font-size: 14px; box-sizing: border-box;
+    }
+    button {
+      background-color: #1a237e; color: white; font-weight: bold;
+      padding: 10px 20px; border: none; border-radius: 6px;
+      margin-top: 20px; cursor: pointer;
+    }
+    button:hover { background-color: #0d1653; }
+    #output {
+      margin-top: 30px; padding: 20px; background: white;
+      border: 1px solid #ccc; border-radius: 8px;
+      white-space: pre-line; font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📝 Copywriter Brief Generator</h1>
+
+  <label for="awareness">🎯 Awareness Level (DARA)</label>
+  <select id="awareness">
+    <option value="S1 - Unaware">S1 - Unaware</option>
+    <option value="S2 - Problem Aware">S2 - Problem Aware</option>
+    <option value="S3 - Solution Aware">S3 - Solution Aware</option>
+    <option value="S4 - Product Aware">S4 - Product Aware</option>
+    <option value="S5 - Most Aware">S5 - Most Aware</option>
+  </select>
+
+  <label for="angle">🎯 Angle</label>
+  <textarea id="angle" rows="2" placeholder="اكتب الزاوية هنا..."></textarea>
+
+  <label for="length">🕐 Length (اختياري)</label>
+  <select id="length">
+    <option value="">— No Length —</option>
+    <option value="Short (10s - 20s)">Short (10s - 20s)</option>
+    <option value="Medium (20s - 35s)">Medium (20s - 35s)</option>
+    <option value="Long (35s - 1min)">Long (35s - 1min)</option>
+  </select>
+
+  <label for="offer">💰 Offer</label>
+  <textarea id="offer" rows="2" placeholder="اكتب العرض هنا..."></textarea>
+
+  <label for="guarantee">🛡️ Guarantee</label>
+  <textarea id="guarantee" rows="2" placeholder="اكتب تفاصيل الضمان هنا..."></textarea>
+
+  <label for="persona">👤 Persona</label>
+  <textarea id="persona" rows="2" placeholder="اكتب البرسونا هنا..."></textarea>
+
+  <label for="idea">💡 Idea</label>
+  <textarea id="idea" rows="2" placeholder="اكتب الفكرة هنا..."></textarea>
+
+  <label for="ref">🔗 Reference (Link or Note) (اختياري)</label>
+  <textarea id="ref" rows="2" placeholder="رابط المنتج ، مثال سابق ، ملاحظات..."></textarea>
+
+  <button onclick="generateBrief()">Generate</button>
+  <button onclick="copyBrief()">Copy</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    function generateBrief() {
+      const awareness = document.getElementById("awareness").value;
+      const angle = document.getElementById("angle").value.trim();
+      const length = document.getElementById("length").value;
+      const offer = document.getElementById("offer").value.trim();
+      const guarantee = document.getElementById("guarantee").value.trim();
+      const persona = document.getElementById("persona").value.trim();
+      const idea = document.getElementById("idea").value.trim();
+      const ref = document.getElementById("ref").value.trim();
+
+      let result = "📝 Copywriter Brief:\n\n";
+      result += "🎯 Awareness Level: " + awareness + "\n";
+      result += "🎯 Angle: " + (angle || "—") + "\n";
+      if (length) result += "🕐 Length: " + length + "\n";
+      result += "💰 Offer: " + (offer || "—") + "\n";
+      result += "🛡️ Guarantee: " + (guarantee || "—") + "\n";
+      result += "👤 Persona: " + (persona || "—") + "\n";
+      result += "💡 Idea: " + (idea || "—") + "\n";
+      if (ref) result += "🔗 Reference: " + ref;
+
+      document.getElementById("output").innerText = result;
+    }
+
+    function copyBrief() {
+      const text = document.getElementById("output").innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("تم نسخ النص بنجاح!");
+      }, () => {
+        alert("حدث خطأ أثناء النسخ.");
+      });
+    }
+  </script>
+</body>
+</html>
